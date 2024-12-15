@@ -11,6 +11,11 @@
   <div class="container">
     <h1>Status Sensor Keamanan Rumah</h1>
 
+    <!-- Slider untuk mengatur jumlah data yang ditampilkan -->
+    <label for="data-slider">Jumlah Data yang Ditampilkan:</label>
+    <input type="range" id="data-slider" min="1" max="50" value="5" />
+    <span id="slider-value">5</span> <!-- Menampilkan nilai slider -->
+
     <!-- Tabel untuk menampilkan data sensor -->
     <table>
       <thead>
@@ -25,13 +30,9 @@
       </tbody>
     </table>
 
-    <canvas id="sensor-chart" width="400" height="200"></canvas>
-
     <button id="refresh-btn">Refresh Data</button>
-
-    <!-- Tombol untuk mengaktifkan LED dan Buzzer -->
-    <button id="led-btn">Aktifkan LED</button>
-    <button id="buzzer-btn">Aktifkan Buzzer</button>
+    <!-- Grafik status sensor -->
+    <canvas id="sensor-chart" width="400" height="200"></canvas>
 
   </div>
 

@@ -4,8 +4,8 @@ body {
   padding: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  min-height: 100vh;
   background-color: #f4f4f4;
 }
 
@@ -15,12 +15,17 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 80%;
+  max-width: 900px;
+  margin-top: 20px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 h1 {
   color: #333;
   margin-bottom: 20px;
+  font-size: 24px;
+  word-wrap: break-word;
 }
 
 table {
@@ -51,8 +56,26 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 button:hover {
   background-color: #45a049;
+}
+
+/* Menambahkan pengaturan untuk responsivitas */
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+  }
 }

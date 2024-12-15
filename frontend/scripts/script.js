@@ -10,7 +10,13 @@ async function fetchSensorData() {
       const tbody = document.getElementById("sensor-data");
       tbody.innerHTML = ""; // Kosongkan tabel sebelum menambah data baru
 
-      data.data.forEach((log) => {
+      // Mengambil nilai slider untuk menentukan jumlah data yang akan ditampilkan
+      const dataCount = document.getElementById("data-slider").value;
+
+      // Mengatur jumlah data yang akan ditampilkan
+      const rowsToDisplay = data.data.slice(0, dataCount);
+
+      rowsToDisplay.forEach((log) => {
         const row = document.createElement("tr");
 
         const idCell = document.createElement("td");
@@ -27,14 +33,15 @@ async function fetchSensorData() {
 
         tbody.appendChild(row);
 
-        // Kirim notifikasi saat sensor miring
-        if (log.tilted) {
-          showNotification();
-        }
+        // Kirim notifikasi saat sensor miring (untuk data terbaru)
+      
       });
-
+      
+      if (data.data.length > 0 && data.data[0].tilted) {
+        showNotification();
+      }
       // Membuat grafik status sensor
-      createChart(data.data);
+      createChart(data.data.slice(0, dataCount));
     } else {
       console.error("Gagal mengambil data dari API");
     }
@@ -99,19 +106,10 @@ function createChart(data) {
 // Event listener untuk tombol refresh
 document.getElementById("refresh-btn").addEventListener("click", fetchSensorData);
 
-// Event listener untuk tombol LED dan Buzzer
-document.getElementById("led-btn").addEventListener("click", () => {
-  fetch("http://<ip_address>/api/led/on", { method: "POST" })
-    .then(response => response.json())
-    .then(data => console.log("LED status:", data))
-    .catch(error => console.error("Error activating LED:", error));
-});
-
-document.getElementById("buzzer-btn").addEventListener("click", () => {
-  fetch("http://<ip_address>/api/buzzer/on", { method: "POST" })
-    .then(response => response.json())
-    .then(data => console.log("Buzzer status:", data))
-    .catch(error => console.error("Error activating Buzzer:", error));
+// Event listener untuk mengupdate nilai slider
+document.getElementById("data-slider").addEventListener("input", function() {
+  // Menampilkan nilai slider yang dipilih di elemen <span>
+  document.getElementById("slider-value").textContent = this.value;
 });
 
 // Panggil fetchSensorData saat halaman dimuat pertama kali
