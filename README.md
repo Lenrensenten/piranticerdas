@@ -1,2 +1,0 @@
-# piranticerdas
-mineminemineminemine

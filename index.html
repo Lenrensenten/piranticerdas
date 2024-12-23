@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sensor Data and Relay Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        #sensorData {
+            margin-top: 20px;
+        }
+
+        #relayStatus {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #chartContainer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .on {
+            background-color: green;
+            color: white;
+        }
+
+        .off {
+            background-color: red;
+            color: white;
+        }
+    </style>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+
+<body>
+    <h1>Relay Control</h1>
+    <!-- Tombol untuk mengatur mode otomatis/manual -->
+    <button id="autoModeButton" class="button on" onclick="setAutoMode(true)">
+        Enable Auto Mode
+    </button>
+    <button id="manualModeButton" class="button off" onclick="setAutoMode(false)">
+        Enable Manual Mode
+    </button>
+    <div id="autoModeStatus" class="status">Mode: Auto</div>
+
+    <button id="relayOn" class="button on" onclick="controlRelay(1)">
+        Turn Pump ON
+    </button>
+    <button id="relayOff" class="button off" onclick="controlRelay(0)">
+        Turn Pump OFF
+    </button>
+    <div id="relayStatus" class="status">Pump is OFF</div>
+
+    <h1>Sensor Data</h1>
+    <p>Soil Moisture: <span id="soil_moisture">--</span>%</p>
+    <p>Temperature: <span id="temperature">--</span>°C</p>
+    <p>Humidity: <span id="humidity">--</span>%</p>
+
+    <!-- Container for charts -->
+    <div class="container">
+        <!-- Canvas for Soil Moisture -->
+        <div id="chartContainer">
+            <canvas id="soilMoistureChart"></canvas>
+            <h3>Soil Moisture</h3>
+        </div>
+        <!-- Canvas for Temperature -->
+        <div id="chartContainer">
+            <canvas id="temperatureChart"></canvas>
+            <h3>Temperature</h3>
+        </div>
+        <!-- Canvas for Humidity -->
+        <div id="chartContainer">
+            <canvas id="humidityChart"></canvas>
+            <h3>Humidity</h3>
+        </div>
+    </div>
+
+    <!-- Include the external JS file -->
+    <script src="script.js"></script>
+</body>
+
+</html>
